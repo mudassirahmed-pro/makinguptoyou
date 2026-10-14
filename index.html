@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Arooj ♡</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;600&family=Kalam:wght@400;700&display=swap');
+
+:root{
+  --paper:#f7f1eb;
+  --paper2:#fffaf6;
+  --ink:#443a38;
+  --muted:#8d7e79;
+  --rose:#c98288;
+  --rose-dark:#a95f68;
+  --line:#ead9d3;
+  --shadow:0 25px 70px rgba(80,55,50,.15);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#171315}
+body{
+  font-family:"DM Sans",sans-serif;color:var(--ink);
+  overflow-x:hidden;
+}
+button{font:inherit}
+#app{
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+  padding:28px 16px;background:
+  radial-gradient(circle at 20% 15%,rgba(255,255,255,.08),transparent 30%),
+  radial-gradient(circle at 80% 85%,rgba(201,130,136,.10),transparent 35%),#171315;
+}
+.phone{
+  width:min(100%,430px);min-height:min(850px,calc(100vh - 40px));
+  position:relative;overflow:hidden;border-radius:28px;
+  background:var(--paper);box-shadow:0 30px 100px rgba(0,0,0,.4);
+}
+.screen{
+  min-height:100%;height:100%;position:absolute;inset:0;
+  display:none;padding:38px 25px 30px;
+  overflow-y:auto;overflow-x:hidden;
+}
+.screen.active{display:flex;flex-direction:column;animation:in .55s ease both}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.grain{position:absolute;inset:0;pointer-events:none;opacity:.16;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.12'/%3E%3C/svg%3E");mix-blend-mode:multiply}
+
+
+/* spotify */
+.spotify-box{width:100%;margin:18px 0 4px;padding:10px;background:rgba(255,255,255,.58);border:1px solid var(--line);border-radius:16px;box-shadow:0 12px 28px rgba(80,55,50,.08)}
+.spotify-label{text-align:center;text-transform:uppercase;letter-spacing:2px;font-size:8px;color:var(--muted);margin:2px 0 8px}
+.spotify-box iframe{display:block;width:100%;height:80px;border:0;border-radius:10px}
+.music-pill{display:inline-flex;align-items:center;gap:7px;margin-top:10px;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--rose-dark)}
+.music-dot{width:7px;height:7px;border-radius:50%;background:var(--rose);box-shadow:0 0 0 5px rgba(201,130,136,.12);animation:pulse 1.7s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 8px rgba(201,130,136,0)}}
+
+/* common */
+.eyebrow{text-transform:uppercase;letter-spacing:3px;font-size:9px;color:var(--muted);text-align:center}
+h1,h2,p{margin:0}
+.serif{font-family:"Cormorant Garamond",serif}
+.script{font-family:"Kalam",cursive}
+.center{text-align:center}
+.spacer{flex:1}
+.btn{
+  border:0;cursor:pointer;background:var(--rose);color:white;
+  padding:13px 23px;border-radius:999px;font-size:11px;
+  letter-spacing:1.5px;text-transform:uppercase;
+  box-shadow:0 9px 20px rgba(169,95,104,.22);
+  transition:.2s transform,.2s background;
+}
+.btn:hover{transform:translateY(-2px);background:var(--rose-dark)}
+.btn.secondary{background:transparent;color:var(--rose-dark);box-shadow:none;border:1px solid var(--line)}
+.tap{font-size:9px;color:#a99a95;letter-spacing:2px;text-transform:uppercase}
+
+/* opening */
+#home{align-items:center;justify-content:center;text-align:center}
+.logo-heart{font-size:30px;margin-bottom:15px;animation:float 3s ease-in-out infinite}
+@keyframes float{50%{transform:translateY(-5px)}}
+#home h1{font-size:43px;font-weight:500;line-height:.95;margin:10px 0}
+#home .sub{font-family:"Kalam";font-size:18px;color:var(--rose-dark);margin-bottom:35px}
+.envelope-wrap{width:250px;height:170px;position:relative;cursor:pointer;margin:8px auto 28px}
+.envelope{
+  position:absolute;inset:18px 8px 0;background:#eee0d0;border:1px solid #d8c3b0;
+  box-shadow:0 18px 35px rgba(80,55,50,.12);border-radius:4px;
+}
+.envelope:before{
+  content:"";position:absolute;inset:0;
+  clip-path:polygon(0 0,50% 53%,100% 0,100% 100%,0 100%);
+  background:#f4e9dc;border:1px solid #d8c3b0;
+}
+.flap{
+  position:absolute;left:8px;right:8px;top:18px;height:82px;
+  background:#f4e9dc;clip-path:polygon(0 0,100% 0,50% 72%);
+  border:1px solid #d8c3b0;transform-origin:top;transition:.8s ease;z-index:2;
+}
+.seal{
+  position:absolute;z-index:3;left:50%;top:70px;transform:translateX(-50%);
+  width:47px;height:47px;border-radius:50%;background:var(--rose);
+  color:white;display:grid;place-items:center;font-size:20px;
+  box-shadow:0 6px 15px rgba(169,95,104,.25);transition:.5s;
+}
+.envelope-wrap.open .flap{transform:rotateX(180deg);opacity:.25}
+.envelope-wrap.open .seal{transform:translateX(-50%) scale(.7);opacity:0}
+.note{font-size:11px;color:var(--muted);line-height:1.7;max-width:270px;margin:auto}
+
+/* memory cards */
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:22px}
+.back{border:0;background:none;color:var(--muted);font-size:12px;cursor:pointer}
+.progress{font-size:9px;letter-spacing:2px;color:var(--muted)}
+.album-title{text-align:center;margin-bottom:18px}
+.album-title h2{font-size:32px;font-weight:500}
+.album-title p{font-family:"Kalam";color:var(--rose-dark);font-size:15px;margin-top:4px}
+.card{
+  background:rgba(255,255,255,.62);border:1px solid #eaded8;border-radius:18px;
+  padding:13px;box-shadow:var(--shadow);transform:rotate(-1deg);
+  margin:5px 5px 20px;
+}
+.photo{
+  width:100%;aspect-ratio:4/4.2;object-fit:cover;border-radius:12px;
+  display:block;background:#eadfd8;
+}
+.photo-placeholder{
+  width:100%;aspect-ratio:4/4.2;border-radius:12px;background:
+  linear-gradient(135deg,#eadbd6,#f8f0eb);
+  display:flex;align-items:center;justify-content:center;text-align:center;
+  color:#a08d87;font-size:11px;letter-spacing:1px;padding:30px;
+}
+.caption{text-align:center;padding:17px 7px 8px}
+.caption .small{font-size:8px;letter-spacing:2px;color:var(--muted);text-transform:uppercase}
+.caption h3{font-family:"Kalam";font-size:20px;font-weight:400;margin:8px 0 4px}
+.caption p{font-family:"Cormorant Garamond";font-size:18px;line-height:1.25}
+.controls{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:8px}
+.arrow{
+  width:40px;height:40px;border-radius:50%;border:1px solid var(--line);
+  background:#fffaf7;color:var(--rose-dark);cursor:pointer;font-size:18px;
+}
+.dots{display:flex;gap:6px}.dot{width:6px;height:6px;background:#dec9c5;border-radius:50%}.dot.on{background:var(--rose)}
+
+/* apology */
+.letter{
+  background:#fffaf7;border:1px solid #e9dcd6;border-radius:20px;padding:30px 23px;
+  box-shadow:var(--shadow);position:relative;
+}
+.letter:before,.letter:after{content:"✿";position:absolute;color:#d8a4a5;font-size:18px}
+.letter:before{left:14px;top:12px}.letter:after{right:14px;bottom:12px}
+.letter h2{text-align:center;font-size:34px;font-weight:500;margin-bottom:13px}
+.letter .intro{text-align:center;font-family:"Kalam";color:var(--rose-dark);font-size:16px;margin-bottom:22px}
+.letter p{font-family:"Cormorant Garamond";font-size:19px;line-height:1.48;margin-bottom:15px}
+.signature{text-align:right;font-family:"Kalam";font-size:20px;color:var(--rose-dark);margin-top:20px}
+.photo-strip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+  width: 100%;
+  margin: 20px auto;
+}
+
+.photo-strip img {
+  width: 180px;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+  flex-shrink: 0;
+}
+.final-heart{font-size:45px;text-align:center;margin:10px 0;animation:beat 1.5s infinite}
+@keyframes beat{50%{transform:scale(1.08)}}
+.choice{display:flex;gap:9px;margin-top:12px}
+.choice .btn{flex:1}
+
+/* tiny decorations */
+.spark{position:absolute;color:#d8a4a5;opacity:.65;pointer-events:none}
+.s1{top:9%;left:8%}.s2{top:17%;right:10%;font-size:20px}.s3{bottom:15%;left:10%;font-size:13px}.s4{bottom:8%;right:8%}
+.footer{text-align:center;font-size:8px;letter-spacing:2px;color:#b09f99;margin-top:16px;text-transform:uppercase}
+</style>
+</head>
+<body>
+<div id="app">
+  <main class="phone">
+    <div class="grain"></div>
+
+    <!-- HOME -->
+    <section class="screen active" id="home">
+      <span class="spark s1">✦</span><span class="spark s2">♡</span>
+      <span class="spark s3">✿</span><span class="spark s4">✦</span>
+      <div class="spacer"></div>
+      <div class="logo-heart">♡</div>
+      <div class="eyebrow">a little something for you Arooj</div>
+      <h1 class="serif">Apko manana,<br>but in a different style.</h1>
+      <div class="sub">because sometimes words aren't enough.</div>
+
+      <div class="envelope-wrap" id="envelope" onclick="openEnvelope()">
+        <div class="envelope"></div>
+        <div class="flap"></div>
+        <div class="seal">♡</div>
+      </div>
+
+      <div class="tap">Idr click kren nh tw screen ese h rahy gi♡</div>
+      <div class="spacer"></div>
+      <p class="note">No pressure. No big speech.<br>Just me trying to convince you properly and creatively.</p>
+    </section>
+
+    <!-- INTRO: Spotify embed -->
+    <section class="screen" id="intro">
+      <span class="spark s1">✦</span><span class="spark s2">♡</span>
+      <div class="spacer"></div>
+      <div class="center">
+        <div class="eyebrow">before anything else</div>
+        <h2 class="serif" style="font-size:44px;margin:13px 0">Arooj,</h2>
+        <p class="script" style="font-size:20px;color:var(--rose-dark);line-height:1.45">
+          I know I messed up.<br>
+          And I don't want our relation<br>
+          to disappear.
+        </p>
+        <p style="font-family:'Cormorant Garamond';font-size:19px;line-height:1.5;margin:25px auto;max-width:330px;color:#655956">
+          I just wanted to make something that feels a little more personal than typing “sorry” and pressing send.
+        </p>
+        <div class="spotify-box">
+          <div class="spotify-label">the song I want playing while you read this</div>
+          <div id="spotify-player"></div>
+        </div>
+        <div class="music-pill" id="music-status"><span class="music-dot"></span> your song ♡</div>
+        <button class="btn secondary" id="musicRetry" style="display:none;margin-top:8px;padding:9px 15px;font-size:8px" onclick="playSpotify()">play the song ♡</button>
+
+      </div>
+      <div class="spacer"></div>
+      <button class="btn" onclick="show('album')">let me explain →</button>
+    </section>
+
+    <!-- ALBUM -->
+    <section class="screen" id="album">
+      <div class="topbar">
+        <button class="back" onclick="show('intro')">← back</button>
+        <span class="progress" id="progress">01 / 04</span>
+      </div>
+      <div class="album-title">
+        <div class="eyebrow">a few things I don't want to forget</div>
+        <h2 class="serif">our little moments</h2>
+        <p>because with YOU even ordinary moments became my favourite ones.</p>
+      </div>
+
+      <div class="card" id="memoryCard"></div>
+
+      <div class="controls">
+        <button class="arrow" onclick="prevMemory()">←</button>
+        <div class="dots" id="dots"></div>
+        <button class="arrow" onclick="nextMemory()">→</button>
+      </div>
+      <button class="btn" style="margin-top:20px;width:100%" onclick="show('sorry')">keep going ♡</button>
+    </section>
+
+    <!-- SORRY -->
+    <section class="screen" id="sorry">
+      <div class="topbar">
+        <button class="back" onclick="show('album')">← back</button>
+        <span class="progress">the important part</span>
+      </div>
+      <div class="spacer"></div>
+      <div class="letter">
+        <div class="eyebrow">from me, properly this time</div>
+        <h2 class="serif">I'm sorry.</h2>
+        <div class="intro">not the quick kind of sorry. the real kind.</div>
+
+        <p>Arooj, I know I hurt you even I also got hurt but what kind of a man I would be if I put my ego first and stop talking to you.</p>
+
+        <p>I care about you. And because I care about you, I should have handled things better and more carefully. </p>
+
+        <p>I’ve been thinking about what happened, and I wanted to acknowledge my part in it properly.</p>
+
+        <p>I let my insecurities get the better of me. Instead of handling my concerns calmly, I asked too many questions that could've been asked more carefully.</p>
+
+        <p>You can talk to whoever you want to but I got mad at the point where you promised me that you won't lie to me, you're 100% honest with me and it came out that way.</p>
+
+        <p>We both know we can't live without talking to each other and also that I do have feelings for you and I can't see you with anyone else - call it jealousy or whatever you want but it is what it is.</p>
+
+        <p>But chalo me apni ego side p rkh k tmhe dil se mana raha hn cuz I don't wanna lose you. I want to create so many good memories with you but I also understand that it has to be something we both want.</p>
+
+        <p>I simply wanted to acknowledge where I went wrong and what I want to do better.</p>
+
+        <p>Baqi agr tmhe sahi lagy tw further call ya text p jb b free ho is ko resolve krlen gy - nh tw tmhara jo faisla wo manzoor</p>
+
+        <div class="signature">— Mudasssir ♡</div>
+      </div>
+      <div class="spacer"></div>
+      <button class="btn" onclick="show('final')">one last thing →</button>
+    </section>
+
+    <!-- FINAL -->
+    <section class="screen" id="final">
+      <span class="spark s1">✦</span><span class="spark s2">♡</span>
+      <div class="spacer"></div>
+      <div class="center">
+        <div class="final-heart">♡</div>
+        <div class="eyebrow">if you made it this far</div>
+        <h2 class="serif" style="font-size:45px;margin:12px 0 18px">Can I make it up to you?</h2>
+        <p class="script" style="font-size:19px;color:var(--rose-dark);line-height:1.5;max-width:330px;margin:auto">
+          We can't change what happened.<br>
+          But we can discuss about what happens next.
+        </p>
+
+        <!-- OPTIONAL FINAL PHOTO -->
+        
+          <div class="photo-strip">
+            <img src="photo5.jpeg" alt="My photo">
+            <img src="photo6.jpeg" alt="Arooj's photo">
+          </div>
+
+
+        <p style="font-family:'Cormorant Garamond';font-size:18px;line-height:1.4">
+          
+        </p>
+      </div>
+      <div class="spacer"></div>
+      <div class="choice">
+        <button class="btn" onclick="accepted()">okay ♡</button>
+        <button class="btn secondary" onclick="accepted()">we'll talk</button>
+      </div>
+      <div class="footer">made with too much thought & a little bit of courage</div>
+    </section>
+
+    <!-- END -->
+    <section class="screen" id="end">
+      <div class="spacer"></div>
+      <div class="center">
+        <div class="final-heart">♡</div>
+        <h2 class="serif" style="font-size:44px">Thank you, Arooj.</h2>
+        <p class="script" style="font-size:19px;color:var(--rose-dark);margin-top:15px">
+          I'll let my actions do the rest.
+        </p>
+      </div>
+      <div class="spacer"></div>
+      <button class="btn secondary" onclick="show('home')">read it again</button>
+    </section>
+  </main>
+</div>
+
+
+<script src="https://open.spotify.com/embed/iframe-api/v1" async></script>
+
+<script>
+let spotifyController = null;
+let spotifyReady = false;
+let spotifyPlayRequested = false;
+
+window.onSpotifyIframeApiReady = (IFrameAPI) => {
+  const element = document.getElementById("spotify-player");
+  const options = {
+    width: "100%",
+    height: 80,
+    uri: "spotify:track:4KHJo29mW1oC5G45XjU8ge"
+  };
+
+  IFrameAPI.createController(element, options, (EmbedController) => {
+    spotifyController = EmbedController;
+    spotifyReady = true;
+
+    EmbedController.addListener("playback_started", () => {
+      document.getElementById("music-status").innerHTML =
+        '<span class="music-dot"></span> playing for you ♡';
+    });
+
+    // If the envelope was clicked before Spotify finished initializing,
+    // try playback as soon as the controller is available.
+    if (spotifyPlayRequested) {
+      EmbedController.play();
+    }
+  });
+};
+
+const memories = [
+  {
+    img: "photo1.jpeg",
+    label: "memory 01 / 04",
+    title: "GO Karting.",
+    text: "The day I felt closest to you. And I would happily live through this day again."
+  },
+  {
+    img: "photo2.jpeg",
+    label: "memory 02 / 04",
+    title: "You & Me",
+    text: "Could have placed a good photo of us here but I like to tease you a little bit :D"
+  },
+  {
+    img: "photo3.jpeg",
+    label: "memory 03 / 04",
+    title: "Got Creative a little bit",
+    text: "Don't have many photos together so I had to create one myself."
+  },
+  {
+    img: "photo4.jpeg",
+    label: "memory 04 / 04",
+    title: "Baddie",
+    text: "Most naughty and innocent photo of you. I love it."
+  }
+];
+
+let memoryIndex = 0;
+
+function show(id){
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
+  document.getElementById(id).classList.add("active");
+  if(id === "album") renderMemory();
+}
+
+function openEnvelope(){
+  const env = document.getElementById("envelope");
+  env.classList.add("open");
+
+  // This click is the user's interaction. Ask Spotify to start playback
+  // through its official iFrame API.
+  spotifyPlayRequested = true;
+  if (spotifyController) {
+    spotifyController.play();
+  }
+
+  setTimeout(() => show("intro"), 850);
+  setTimeout(() => {
+    if (!document.querySelector("#music-status").textContent.includes("playing")) {
+      document.getElementById("musicRetry").style.display = "inline-flex";
+    }
+  }, 2200);
+}
+
+function renderMemory(){
+  const m = memories[memoryIndex];
+  const card = document.getElementById("memoryCard");
+
+  // Change these filenames to your own photos.
+  card.innerHTML = `
+    <img class="photo" src="${m.img}" alt="Memory ${memoryIndex+1}"
+      onerror="this.outerHTML='<div class=\\'photo-placeholder\\'>YOUR PHOTO ${memoryIndex+1}<br><small>replace ${m.img} with your photo</small></div>'">
+    <div class="caption">
+      <div class="small">${m.label}</div>
+      <h3>${m.title}</h3>
+      <p>${m.text}</p>
+    </div>
+  `;
+
+  document.getElementById("progress").textContent =
+    String(memoryIndex+1).padStart(2,"0") + " / " + String(memories.length).padStart(2,"0");
+
+  document.getElementById("dots").innerHTML =
+    memories.map((_,i)=>`<span class="dot ${i===memoryIndex?'on':''}"></span>`).join("");
+}
+
+function nextMemory(){
+  memoryIndex = (memoryIndex + 1) % memories.length;
+  renderMemory();
+}
+function prevMemory(){
+  memoryIndex = (memoryIndex - 1 + memories.length) % memories.length;
+  renderMemory();
+}
+function playSpotify(){
+  if (spotifyController) {
+    spotifyController.play();
+    document.getElementById("musicRetry").style.display = "none";
+  }
+}
+function accepted(){
+  show("end");
+}
+
+// Swipe support for the album
+let touchStartX = 0;
+document.getElementById("album").addEventListener("touchstart", e => {
+  touchStartX = e.changedTouches[0].screenX;
+});
+document.getElementById("album").addEventListener("touchend", e => {
+  const dx = e.changedTouches[0].screenX - touchStartX;
+  if(Math.abs(dx) > 45) dx < 0 ? nextMemory() : prevMemory();
+});
+</script>
+</body>
+</html>
